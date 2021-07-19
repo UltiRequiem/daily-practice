@@ -1,18 +1,17 @@
-name: Update submodules
+name: "Pull Submodules"
 
 on:
-  schedule:
-    - cron: "18 12 * * 2"
   workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
-  update:
+  pull:
+    name: Pull Submodules
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
-      - name: Pull & update submodules recursively
+      - name: Checkout repository and submodules
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
