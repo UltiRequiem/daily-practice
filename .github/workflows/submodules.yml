@@ -22,5 +22,6 @@ jobs:
           git config --global user.email "github@github.com"
       
       - name: Add and Push
+        run: |
           git add .
           git commit -am "Update submodules" && git push
