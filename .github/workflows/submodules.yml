@@ -23,4 +23,4 @@ jobs:
       
       - name: Add and Push
           git add .
-          git commit -m "Update submodules" && git push
+          git commit -am "Update submodules" && git push
