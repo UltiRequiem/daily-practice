@@ -1,31 +1,23 @@
-name: "Pull Submodules"
+name: Update submodules
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "18 12 * * 2"
+  workflow_dispatch:
 
 jobs:
-  pull:
-    name: Pull Submodules
+  update:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
 
     steps:
-      - name: Checkout repository and submodules
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.CI_TOKEN }}
-          submodules: recursive
+      - uses: actions/checkout@v2
 
-      - name: Git Sumbodule Update
+      - name: Pull & update submodules recursively
         run: |
-          git pull --recurse-submodules
-          git submodule update --remote --recursive
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
 
-      - name: Commit and Push Changes
+      - name: Commit & push changes
         run: |
           git config --global user.name ${{ secrets.USER_NAME }}
           git config --global user.email ${{ secrets.USER_EMAIL }}
