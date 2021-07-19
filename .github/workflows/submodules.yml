@@ -1,8 +1,9 @@
 name: "Pull Submodules"
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: "18 12 * * 2"
+    - cron: "0 0 * * *"
 
 jobs:
   pull:
