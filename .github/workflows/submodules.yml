@@ -9,8 +9,24 @@ jobs:
   pull:
     name: Pull Submodules
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
     steps:
       - name: Checkout repository and submodules
         uses: actions/checkout@v2
         with:
+          token: ${{ secrets.CI_TOKEN }}
           submodules: recursive
+
+      - name: Git Sumbodule Update
+        run: |
+          git pull --recurse-submodules
+          git submodule update --remote --recursive
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name ${{ secrets.USER_NAME }}
+          git config --global user.email ${{ secrets.USER_EMAIL }}
+          git commit -am "Update submodules" && git push
