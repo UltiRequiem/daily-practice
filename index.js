@@ -19,3 +19,5 @@ class SoftwareEngineer {
     this.challenge = challenge;
   }
 }
+
+module.exports = { SoftwareEngineer };
